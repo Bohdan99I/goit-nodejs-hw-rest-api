@@ -4,13 +4,7 @@ const { ctrlWrapper } = require("../helpers");
 
 const listContacts = async (_, res) => {
   const result = await contacts.listContacts();
-  res.json({
-    status: "success",
-    code: 200,
-    data: {
-      result,
-    },
-  });
+  res.json(result);
 };
 
 const getContactById = async (req, res) => {
@@ -19,25 +13,12 @@ const getContactById = async (req, res) => {
   if (!result) {
     throw HttpError(404, "Not found");
   }
-   res.json({
-     status: "success",
-     code: 200,
-     data: {
-       result,
-     },
-   });
+  res.json(result);
 };
 
 const addContact = async (req, res) => {
   const result = await contacts.addContact(req.body);
-  res.status(201).json({
-    status: "success",
-    code: 201,
-    message: "contact added",
-    data: {
-      result,
-    },
-  });
+  res.status(201).json(result);
 };
 
 const removeContact = async (req, res) => {
@@ -46,11 +27,7 @@ const removeContact = async (req, res) => {
   if (!result) {
     throw HttpError(404, "Not found");
   }
-  res.json({
-    status: "success",
-    code: 200,
-    message: "contact deleted",
-  });
+  res.json({ message: "contact deleted" });
 };
 
 const updateContact = async (req, res) => {
@@ -59,14 +36,7 @@ const updateContact = async (req, res) => {
   if (!result) {
     throw HttpError(404, "Not found");
   }
-   res.json({
-     status: "success",
-     code: 200,
-     message: "contact updated",
-     data: {
-       result,
-     },
-   });
+  res.json(result);
 };
 
 module.exports = {
