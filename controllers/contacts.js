@@ -6,6 +6,9 @@ const listContacts = async (_, res) => {
   const result = await Contact.find({}, "-createdAt -updatedAt");
   console.log(result);
   res.json(result);
+};
+
+const getContactById = async (req, res) => {
   const { contactId } = req.params;
   const result = await Contact.findById(contactId);
   if (!result) {
