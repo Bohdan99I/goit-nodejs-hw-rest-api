@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const app = require("./app");
 
-const DB_HOST =
-  "mongodb+srv://Bohdan99:tQ9zlGSPIb2geAXk@cluster0.jy2adfh.mongodb.net/db-contacts?retryWrites=true&w=majority&appName=AtlasApp";
+const { DB_HOST } = process.env;
+  
 
 mongoose.set("strictQuery", true);
 
