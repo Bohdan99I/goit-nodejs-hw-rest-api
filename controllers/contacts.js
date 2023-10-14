@@ -2,7 +2,7 @@ const { Contact } = require("../models/contact");
 const { HttpError } = require("../helpers");
 const { ctrlWrapper } = require("../helpers");
 
-const listContacts = async (_, res) => {
+const listContacts = async (req, res) => {
   const { _id: owner } = req.user;
   const { page = 1, limit = 20, favorite = null } = req.query;
   const skip = (page - 1) * limit;
