@@ -5,18 +5,17 @@ const { HttpError } = require("../helpers");
 const ctrlWrapper = require("../helpers/ctrlWrapper");
 require("dotenv").config();
 
-
-
 const { SECRET_KEY } = process.env;
 
 const registerUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+
   if (user) {
     throw HttpError(409, "Email in use");
   }
 
-  const hashPassword = await bcrypt.hash(password, 10);  
+  const hashPassword = await bcrypt.hash(password, 10);
 
   const result = await User.create({ ...req.body, password: hashPassword });
   res.status(201).json({
@@ -62,6 +61,7 @@ const getCurrentUser = (req, res) => {
 const logoutUser = async (req, res) => {
   const { _id } = req.user;
   const user = await User.findById({ _id });
+
   if (!user) {
     throw HttpError(401);
   }
@@ -72,6 +72,7 @@ const logoutUser = async (req, res) => {
 const updateStatusUser = async (req, res) => {
   const { _id } = req.user;
   const result = await User.findByIdAndUpdate(_id, req.body, { new: true });
+
   if (!result) {
     throw HttpError(404);
   }
