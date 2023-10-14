@@ -8,7 +8,12 @@ router.get("/", authenticate, ctrl.listContacts);
 
 router.get("/:contactId", authenticate, isValidId, ctrl.getContactById);
 
-router.post("/", authenticate, validateBody(schemas.addSchema), ctrl.addContact);
+router.post(
+  "/",
+  authenticate,
+  validateBody(schemas.addSchema),
+  ctrl.addContact
+);
 
 router.delete("/:contactId", authenticate, isValidId, ctrl.removeContact);
 

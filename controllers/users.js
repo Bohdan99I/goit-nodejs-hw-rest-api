@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models/user");
 const { HttpError } = require("../helpers");
 const ctrlWrapper = require("../helpers/ctrlWrapper");
+require("dotenv").config();
 
-const dotenv = require("dotenv");
 
-dotenv.config();
+
 const { SECRET_KEY } = process.env;
 
 const registerUser = async (req, res) => {
