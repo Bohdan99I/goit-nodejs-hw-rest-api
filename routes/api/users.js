@@ -24,6 +24,10 @@ router.patch(
   ctrl.updateStatusUser
 );
 
+router.post("/verify", ctrl.returnVerifyUser);
+
+router.get("/verify/:verificationToken", ctrl.verifyUser);
+
 router.patch(
   "/avatars",
   authenticate,
