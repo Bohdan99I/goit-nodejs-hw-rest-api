@@ -4,8 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
-const authRouter = require("./routes/api/users")
-
+const authRouter = require("./routes/api/users");
 
 const app = express();
 
@@ -25,6 +24,7 @@ app.use((_, res) => {
 
 app.use((err, __, res, _) => {
   const { status = 500, message = "Server error" } = err;
+
   res.status(status).json({ message });
 });
 
