@@ -124,6 +124,7 @@ const loginUser = async (req, res) => {
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
   await User.findByIdAndUpdate(user._id, { token });
 
   res.status(200).json({
@@ -137,6 +138,7 @@ const loginUser = async (req, res) => {
 
 const getCurrentUser = (req, res) => {
   const { email, subscription } = req.user;
+
   res.json({
     email,
     subscription,
@@ -150,7 +152,9 @@ const logoutUser = async (req, res) => {
   if (!user) {
     throw HttpError(401);
   }
+
   await User.findByIdAndUpdate(_id, { token: "" });
+
   res.status(204).json({ message: "Logout success" });
 };
 
@@ -161,22 +165,24 @@ const updateStatusUser = async (req, res) => {
   if (!result) {
     throw HttpError(404);
   }
+
   res.json(result);
 };
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
   const { path: tempUpload, originalname } = req.file;
-
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarsDir, filename);
 
   await Jimp.read(tempUpload).then((img) =>
     img.resize(250, 250).write(resultUpload)
   );
+
   await fs.unlink(tempUpload);
 
   const avatarURL = path.join("avatars", filename);
+
   await User.findByIdAndUpdate(_id, { avatarURL });
 
   res.json({
